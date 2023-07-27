@@ -18,6 +18,10 @@ class ResourceType(str, enum.Enum):
 
     CPU = "cpu"
     Memory = "memory"
+    NodeLimit1 = "node_limit1"
+    NodeLimit2 = "node_limit2"
+    NodeLimit3 = "node_limit3"
+    NodeLimit4 = "node_limit4"
 
 
 RecommendationValue = Union[float, Literal["?"], None]
@@ -71,12 +75,36 @@ class ResourceAllocations(pd.BaseModel):
                 ResourceType.Memory: container.resources.requests.get("memory")
                 if container.resources and container.resources.requests
                 else None,
+                ResourceType.NodeLimit1: container.resources.requests.get("node_limit1")
+                if container.resources and container.resources.requests
+                else None,
+                ResourceType.NodeLimit2: container.resources.requests.get("node_limit2")
+                if container.resources and container.resources.requests
+                else None,
+                ResourceType.NodeLimit3: container.resources.requests.get("node_limit3")
+                if container.resources and container.resources.requests
+                else None,
+                ResourceType.NodeLimit4: container.resources.requests.get("node_limit4")
+                if container.resources and container.resources.requests
+                else None,
             },
             limits={
                 ResourceType.CPU: container.resources.limits.get("cpu")
                 if container.resources and container.resources.limits
                 else None,
                 ResourceType.Memory: container.resources.limits.get("memory")
+                if container.resources and container.resources.limits
+                else None,
+                ResourceType.NodeLimit1: container.resources.limits.get("node_limit1")
+                if container.resources and container.resources.limits
+                else None,
+                ResourceType.NodeLimit2: container.resources.limits.get("node_limit2")
+                if container.resources and container.resources.limits
+                else None,
+                ResourceType.NodeLimit3: container.resources.limits.get("node_limit3")
+                if container.resources and container.resources.limits
+                else None,
+                ResourceType.NodeLimit4: container.resources.limits.get("node_limit4")
                 if container.resources and container.resources.limits
                 else None,
             },
