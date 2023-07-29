@@ -74,6 +74,7 @@ class PrometheusMetricsService(MetricsService):
 
         self.url = self.config.prometheus_url
         self.url = self.url or self.prometheus_discovery.find_metrics_url()
+        self.info(f"Connecting to {self.name()} for {self.cluster} cluster")
 
         if not self.url:
             raise PrometheusNotFound(

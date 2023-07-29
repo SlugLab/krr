@@ -79,11 +79,7 @@ class ClusterLoader(Configurable):
             return []
 
         objects = itertools.chain(*objects_tuple)
-        if self.config.namespaces == "*":
-            # NOTE: We are not scanning kube-system namespace by default
-            result = [obj for obj in objects if obj.namespace != "kube-system"]
-        else:
-            result = [obj for obj in objects if obj.namespace in self.config.namespaces]
+        result = [obj for obj in objects if obj.namespace != "kube-system" and obj.namespace != "monitoring"]
 
         namespaces = {obj.namespace for obj in result}
         self.info(f"Found {len(result)} objects across {len(namespaces)} namespaces in {self.cluster}")
